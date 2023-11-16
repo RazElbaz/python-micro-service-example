@@ -31,7 +31,7 @@ async def update_stream(request: Request, stream_id: str, stream_data: UpdateStr
     client = request.app.mongodb_client
     stream = crud.get_stream_by_id(client, stream_id)
     logger.debug(f"updating stream  {stream}")
-    Stream.parse_obj(stream).name = stream_data.name
+    stream["name"] = stream_data.name
     updated_stream = crud.update_stream(client, stream)
     logger.info(f'Received request to update stream with ID {stream_id}: {stream_data.dict()}')
     return updated_stream

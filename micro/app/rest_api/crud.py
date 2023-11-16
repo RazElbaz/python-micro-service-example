@@ -60,7 +60,7 @@ def get_stream_by_id(client, stream_id):
 def update_stream(client, stream):
     db = client["tests"]
     collection = db["streams"]
-    logger.info(f'update stream: {stream["id"]}')
+    logger.info(f'update stream: {stream["name"]}')
     # Assuming stream["id"] is the UUID you want to use for querying
     query = {"id": stream["id"]}
 
