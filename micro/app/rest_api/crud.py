@@ -56,7 +56,7 @@ def get_stream_by_id(client, stream_id):
             detail=f"An unexpected error occurred: {str(e)}"
         )
 
-
+#the update of the name with the id field ##works
 def update_stream(client, stream):
     db = client["tests"]
     collection = db["streams"]
@@ -76,3 +76,53 @@ def update_stream(client, stream):
         return {"message": "Stream not found"}
 
 
+# #the update of the name with the _id field ##works with request:http://localhost:8000/update_stream/5cf38461-defc-43a5-a7d1-af2e86074a99
+# def update_stream(client, stream):
+#     db = client["tests"]
+#     collection = db["streams"]
+#     logger.info(f'update stream: {(stream["_id"])}')
+#     query = {"_id": stream["_id"]}
+
+#     # Exclude the "id" field from the update to prevent modifying it
+#     update_data = {key: value for key, value in stream.items() if key != "id"}
+
+#     result = collection.update_one(query, {"$set": update_data})
+
+#     if result.matched_count > 0:
+#         return {"message": "Stream updated successfully"}
+#     else:
+#         return {"message": "Stream not found"}
+
+def delete_stream(client, stream_id):
+    db = client["tests"]
+    collection = db["streams"]
+    logger.info(f'delete stream: {stream_id}')
+
+    # Assuming stream_id is the ObjectId you want to use for querying
+    query = {"id": stream_id}
+
+    result = collection.delete_one(query)
+
+    if result.deleted_count > 0:
+        return {"message": "Stream deleted successfully"}
+    else:
+        return {"message": "Stream not found"}
+    
+
+async def create_streams(client, stream_data):
+    db = client["tests"]
+    stream = db["streams"]
+
+    new_stream = {
+            "id": stream_data.id,
+            "name": stream_data.name,
+            "source": stream_data.source,
+            "media": stream_data.media,
+            "site_id": stream_data.site_id,
+            "active": stream_data.active,
+        }
+    
+    result = stream.insert_one(new_stream)
+    inserted_id = result.inserted_id
+    print(f"Inserted stream with _id: {inserted_id}")
+    return inserted_id

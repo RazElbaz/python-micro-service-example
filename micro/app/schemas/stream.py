@@ -1,7 +1,15 @@
 from pydantic import BaseModel, Field
-
+import uuid
 class Stream(BaseModel):
     id: str
+    name: str
+    source: dict
+    media: dict
+    site_id: str
+    active: bool
+
+class CreateStream(BaseModel):
+    id: str = str(uuid.uuid4())  # Assign a default value
     name: str
     source: dict
     media: dict
