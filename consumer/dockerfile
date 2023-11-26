@@ -1,0 +1,31 @@
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file and .env file into the container
+COPY requirements.txt .
+ 
+
+# Explicitly load .env
+RUN set -o allexport; source .env; set +o allexport
+
+# Install the required Python packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set the environment variable
+ENV PYTHONUNBUFFERED 1
+
+# Copy the FastAPI application code into the container
+COPY . .
+
+# Expose the port that the application will run on
+EXPOSE 80
+
+
+# Command to run the FastAPI application
+CMD ["uvicorn", "consumer:app", "--host", "0.0.0.0", "--port", "80"]
+
+
+
+
