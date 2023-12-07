@@ -1,6 +1,6 @@
 # Messaging Microservice
 
-This repository contains a Python-based microservice for handling and processing messages from different channels, such as text messages, email messages, and WhatsApp messages. 
+This repository contains a  Python-based API microservice designed to serve as an interface between the system and external communication channels. The primary focus of this API is to handle and process messages originating from different sources, including text messages, email messages, and WhatsApp messages.
 
 ## Input and Output
 
