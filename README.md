@@ -109,16 +109,7 @@ AWS_REGION=your-aws-region
 
 ## Running Tests
 
-The messaging microservice includes a set of tests to ensure the proper functionality of its components. Before running the tests, make sure you have the required dependencies installed, including [pytest](https://docs.pytest.org/en/stable/).
 
-### Prerequisites
-
-- Python and [pip](https://pip.pypa.io/en/stable/installation/) installed on your system.
-- Install dependencies:
-
-  ```bash
-  pip install pytest
-  ```
 
 ### Test Execution
 
