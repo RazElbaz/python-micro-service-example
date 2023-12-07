@@ -2,6 +2,7 @@
 
 This repository contains a  Python-based API microservice designed to serve as an interface between the system and external communication channels. The primary focus of this API is to handle and process messages originating from different sources, including text messages, email messages, and WhatsApp messages.
 [Link to Canva Design](https://www.canva.com/design/DAF2UBaTIKs/EsC4M3QqLbREiKvR0GjuZw/edit?utm_content=DAF2UBaTIKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+![Alt text](https://drive.google.com/file/d/11EStVa_bnMwBWhXOylFoZdpXzynUMAWy/view?usp=sharing)
 
 ## Input and Output
 
