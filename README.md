@@ -1,0 +1,132 @@
+# Messaging Microservice Readme
+
+This repository contains a Python-based microservice for handling and processing messages from different channels, such as text messages, email messages, and WhatsApp messages. 
+
+## Input and Output
+
+### Input
+
+The messaging microservice accepts messages from various channels, including text messages, email messages, and WhatsApp messages. The input messages are sent to the microservice through a RabbitMQ message broker. Each type of message (text, email, WhatsApp) is routed to the microservice using specific routing keys.
+
+#### Supported Message Types:
+
+1. **Text Message:**
+   - **Routing Key:** `text_message`
+   - **Input Format:** Plain text message.
+
+2. **Email Message:**
+   - **Routing Key:** `email_message`
+   - **Input Format:** JSON payload conforming to the `EmailMessagereceived` schema.
+
+3. **WhatsApp Message:**
+   - **Routing Key:** `whatsapp_message`
+   - **Input Format:** JSON payload conforming to the `WhatsappMessagereceived` schema.
+
+### Output
+
+The microservice processes the input messages and performs the following actions based on the message type:
+
+1. **Text Message:**
+   - Logs the received text message.
+
+2. **Email Message:**
+   - Sends an email with the specified subject, message, and optional attachment to the recipient email address.
+
+3. **WhatsApp Message:**
+   - Sends a WhatsApp message with the specified content and optional media attachment to the specified phone number.
+
+## Getting Started
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) installed on your system.
+
+### Installation and Setup
+
+Build the Docker image:
+
+```bash
+docker build -t messaging-microservice .
+```
+
+### Environment Configuration
+
+Create a `.env` file in the root directory and set the following environment variables:
+
+```env
+RABBIT_HOST=your-rabbit-host
+RABBIT_PORT=your-rabbit-port
+RABBIT_USERNAME=your-rabbit-username
+RABBIT_PASSWORD=your-rabbit-password
+
+SMTP_HOST=your-smtp-host
+SMTP_PORT=your-smtp-port
+SMTP_USER=your-smtp-username
+SMTP_PASSWORD=your-smtp-password
+
+TWILIO_ACCOUNT_SID=your-twilio-account-sid
+TWILIO_AUTH_TOKEN=your-twilio-auth-token
+TWILIO_PHONE_NUMBER=your-twilio-phone-number
+
+AWS_BUCKET_NAME=your-aws-bucket-name
+AWS_ACCESS_KEY=your-aws-access-key
+AWS_SECRET_KEY=your-aws-secret-key
+AWS_REGION=your-aws-region
+```
+
+### Usage
+
+1. Create a Docker network for RabbitMQ:
+
+   ```bash
+   docker network create rabbits
+   ```
+
+2. Run RabbitMQ container:
+
+   ```bash
+   docker run -d --rm --net rabbits -p 8080:15672 --hostname rabbit-1 --name rabbit-1 rabbitmq:3.8
+   ```
+
+3. Build and run the messaging microservice container:
+
+   ```bash
+   docker build -t messaging-microservice .
+   docker run -it --rm --net rabbits -p 80:8080 messaging-microservice
+   ```
+
+### Directory Structure
+
+- **app/**: Contains the microservice implementation files.
+  - **handlers/**: Message handling logic for different message types.
+  - **senders/**: Modules for sending messages through email and WhatsApp.
+  - **templates/**: Message templates for email and WhatsApp.
+  - **utils/**: Utility modules, including logger and AWS-related functions.
+- **.env**: Environment variable configuration file.
+- **Dockerfile**: Docker configuration file for building the microservice image.
+- **requirements.txt**: Python dependencies file.
+- **README.md**: Documentation file (you're reading it now).
+
+## Running Tests
+
+The messaging microservice includes a set of tests to ensure the proper functionality of its components. Before running the tests, make sure you have the required dependencies installed, including [pytest](https://docs.pytest.org/en/stable/).
+
+### Prerequisites
+
+- Python and [pip](https://pip.pypa.io/en/stable/installation/) installed on your system.
+- Install dependencies:
+
+  ```bash
+  pip install pytest
+  ```
+
+### Test Execution
+
+To run the tests, use the following command:
+
+```bash
+pytest -p no:warnings test.py
+```
+
+The `-p no:warnings` option is used to suppress unnecessary warnings during test execution.
+
