@@ -1,4 +1,4 @@
-# Messaging Microservice Readme
+# Messaging Microservice
 
 This repository contains a Python-based microservice for handling and processing messages from different channels, such as text messages, email messages, and WhatsApp messages. 
 
@@ -95,17 +95,17 @@ AWS_REGION=your-aws-region
    docker run -it --rm --net rabbits -p 80:8080 messaging-microservice
    ```
 
-### Directory Structure
+## Directory Structure
 
 - **app/**: Contains the microservice implementation files.
   - **handlers/**: Message handling logic for different message types.
   - **senders/**: Modules for sending messages through email and WhatsApp.
   - **templates/**: Message templates for email and WhatsApp.
-  - **utils/**: Utility modules, including logger and AWS-related functions.
+  - **utils/**: Utility modules, including rmq, logger and aws.
+- **test.py**: Test cases for ensuring proper functionality.
 - **.env**: Environment variable configuration file.
 - **Dockerfile**: Docker configuration file for building the microservice image.
-- **requirements.txt**: Python dependencies file.
-- **README.md**: Documentation file (you're reading it now).
+- **pyproject.toml**: Poetry configuration file.
 
 ## Running Tests
 
