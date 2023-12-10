@@ -143,4 +143,4 @@ docker run -it --rm --net rabbits -p 81:8080 publisher
 ```
 
 This will build the Docker image for the `test_publisher` and run it in a container. Ensure that you have the RabbitMQ server running and the necessary environment variables configured as mentioned in the main README.
-```
+
