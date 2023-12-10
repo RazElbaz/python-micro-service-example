@@ -112,11 +112,35 @@ AWS_REGION=your-aws-region
 
 ### Test Execution
 
-To run the tests, use the following command:
+To run the tests and ensure proper functionality, use the following command:
 
 ```bash
-pytest -p no:warnings test.py
+pytest -p no:warnings tests/test.py
 ```
 
-The `-p no:warnings` option is used to suppress unnecessary warnings during test execution.
+The `-p no:warnings` option suppresses unnecessary warnings during test execution.
 
+### Running the Test Publisher
+
+If you want to test the publisher functionality separately, you can use the `test_publisher` located in the `tests/test_publisher` directory. Follow these steps to build and run the `test_publisher` Docker container:
+
+#### Navigate to the Test Publisher Directory
+
+```bash
+cd ./tests/test_publisher/
+```
+
+#### Build the Docker Image
+
+```bash
+docker build -t publisher .
+```
+
+#### Run the Docker Container
+
+```bash
+docker run -it --rm --net rabbits -p 81:8080 publisher
+```
+
+This will build the Docker image for the `test_publisher` and run it in a container. Ensure that you have the RabbitMQ server running and the necessary environment variables configured as mentioned in the main README.
+```
