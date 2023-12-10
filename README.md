@@ -102,11 +102,18 @@ AWS_REGION=your-aws-region
   - **handlers/**: Message handling logic for different message types.
   - **senders/**: Modules for sending messages through email and WhatsApp.
   - **templates/**: Message templates for email and WhatsApp.
-  - **utils/**: Utility modules, including rmq, logger and aws.
-- **test.py**: Test cases for ensuring proper functionality.
+  - **utils/**: Utility modules, including RMQ, logger, and AWS.
+
+- **tests/**: Directory for test files.
+  - **test.py**: Test cases for ensuring proper functionality.
+  - **test_publisher/**: A folder for creating a test that connects to rabbitmq and sends messages.(The test is done by running the messaging_service, the messages are received)
+    - **dockerfile**: Docker configuration file for building the publisher image.
+    - **publisher.py**: Python script connecting to RabbitMQ to publish messages.
+
 - **.env**: Environment variable configuration file.
 - **Dockerfile**: Docker configuration file for building the microservice image.
 - **pyproject.toml**: Poetry configuration file.
+
 
 ## Running Tests
 
@@ -143,4 +150,3 @@ docker run -it --rm --net rabbits -p 81:8080 publisher
 ```
 
 This will build the Docker image for the `test_publisher` and run it in a container. Ensure that you have the RabbitMQ server running and the necessary environment variables configured as mentioned in the main README.
-
